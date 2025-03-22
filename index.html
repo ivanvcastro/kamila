@@ -41,33 +41,37 @@
         #question {
             font-size: 3rem;
             font-weight: bold;
-            margin-bottom: 40px;
+            margin-bottom: 100px;
             color: white;
             text-shadow: 3px 3px 6px black;
         }
-        .button {
-            font-size: 2rem;
-            padding: 15px 30px;
-            border: none;
-            cursor: pointer;
-            margin: 20px;
-            transition: 0.3s;
-            border-radius: 10px;
+        #button-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px; /* Espaçamento entre os botões */
+            margin-top: 20px;
+            position: relative; /* Permite o movimento dentro do contêiner */
+            height: 100px; /* Define uma altura para o contêiner */
         }
+
+        #yes, #no {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
         #yes {
             background-color: green;
             color: white;
-            position: relative;
-            z-index: 2;
         }
+
         #no {
             background-color: red;
             color: white;
-            position: absolute;
-            top: 60%; /* Posiciona inicialmente abaixo */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
+            position: absolute; /* Permite que o botão "Não" se mova */
         }
         #hearts, #fireworks {
             position: absolute;
