@@ -147,8 +147,8 @@
         }
 
         // Adiciona eventos para desktop e dispositivos móveis
-        noButton.addEventListener("mouseover", moveNoButton);
-        noButton.addEventListener("touchstart", function (e) {
+        noButton.addEventListener("click", moveNoButton);
+        noButton.addEventListener("click", function (e) {
             e.preventDefault(); // Previne o comportamento padrão do toque
             moveNoButton();
         });
