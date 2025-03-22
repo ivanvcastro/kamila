@@ -136,7 +136,7 @@
         changeBackground();
         setInterval(changeBackground, 4000); // Troca a cada 4 segundos
 
-       // Movimento do botão "Não"
+        // Movimento do botão "Não" v2
         let noButton = document.getElementById("no");
 
         function moveNoButton() {
@@ -150,6 +150,10 @@
         noButton.addEventListener("mouseover", moveNoButton);
         noButton.addEventListener("touchstart", function (e) {
             e.preventDefault(); // Previne o comportamento padrão do toque
+            moveNoButton();
+        });
+        noButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Garante que o botão continue se movendo após cliques
             moveNoButton();
         });
 
