@@ -136,13 +136,25 @@
         changeBackground();
         setInterval(changeBackground, 4000); // Troca a cada 4 segundos
 
-        // Movimento do botão "Não"
-        let noButton = document.getElementById("no");
-        noButton.addEventListener("mouseover", function() {
+        // Movimento do botão "Não" v2 
+        let noButton = document.getElementById("no"); 
+
+        function moveNoButton() {
             let x = Math.random() * (window.innerWidth - 150);
             let y = Math.random() * (window.innerHeight - 100);
             noButton.style.left = x + "px";
             noButton.style.top = y + "px";
+        }
+
+        // Adiciona eventos para desktop e dispositivos móveis
+        noButton.addEventListener("click", moveNoButton);
+        noButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Previne o comportamento padrão do toque
+            moveNoButton();
+        });
+        noButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Garante que o botão continue se movendo após cliques
+            moveNoButton();
         });
 
         // Animação dos corações e fogos ao clicar em "Sim"
