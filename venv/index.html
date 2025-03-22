@@ -148,7 +148,10 @@
 
         // Adiciona eventos para desktop e dispositivos móveis
         noButton.addEventListener("mouseover", moveNoButton);
-        noButton.addEventListener("touchstart", moveNoButton);
+        noButton.addEventListener("touchstart", function (e) {
+            e.preventDefault(); // Previne o comportamento padrão do toque
+            moveNoButton();
+        });
 
         // Animação dos corações e fogos ao clicar em "Sim"
         document.getElementById("yes").addEventListener("click", function() {
