@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quer namorar comigo?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            background-color: black;
+        }
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: contain; /* Mantém proporção */
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background 2s;
+            z-index: -1;
+        }
+        #container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+        #question {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: white;
+            text-shadow: 3px 3px 6px black;
+        }
+        .button {
+            font-size: 2rem;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            margin: 20px;
+            transition: 0.3s;
+            border-radius: 10px;
+        }
+        #yes {
+            background-color: green;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+        #no {
+            background-color: red;
+            color: white;
+            position: absolute;
+            top: 60%; /* Posiciona inicialmente abaixo */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        #hearts, #fireworks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 3rem;
+            animation: float 3s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            border-radius: 50%;
+            opacity: 1;
+            animation: explode 1.5s ease-out forwards;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="container">
+        <div id="question">Quer namorar comigo? 💖</div>
+        <button id="yes" class="button">Sim</button>
+        <button id="no" class="button">Não</button>
+    </div>
+    <div id="hearts"></div>
+    <div id="fireworks"></div>
+
+    <script>
+        // Imagens de fundo redimensionadas corretamente
+        let images = [
+            "WhatsApp Image 2025-03-19 at 18.51.19 (1).jpeg",
+            "WhatsApp Image 2025-03-19 at 18.51.19.jpeg",
+            "WhatsApp Image 2025-03-19 at 18.51.18 (1).jpeg",
+            "WhatsApp Image 2025-03-19 at 18.51.18.jpeg",
+            "WhatsApp Image 2025-03-19 at 18.51.09.jpeg",
+            "1742592688277.png"
+        ];
+
+        let background = document.getElementById("background");
+        let index = 0;
+        
+        function changeBackground() {
+            background.style.backgroundImage = `url('${images[index]}')`;
+            index = (index + 1) % images.length;
+        }
+        changeBackground();
+        setInterval(changeBackground, 4000); // Troca a cada 4 segundos
+
+        // Movimento do botão "Não"
+        let noButton = document.getElementById("no");
+        noButton.addEventListener("mouseover", function() {
+            let x = Math.random() * (window.innerWidth - 150);
+            let y = Math.random() * (window.innerHeight - 100);
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+        });
+
+        // Animação dos corações e fogos ao clicar em "Sim"
+        document.getElementById("yes").addEventListener("click", function() {
+            let hearts = document.getElementById("hearts");
+            let fireworks = document.getElementById("fireworks");
+            hearts.style.display = "flex";
+            fireworks.style.display = "flex";
+
+            // Criando os corações (maiores e mais)
+            for (let i = 0; i < 40; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = Math.random() * window.innerHeight + "px";
+                heart.style.fontSize = (Math.random() * 3 + 2) + "rem"; // Tamanho aleatório maior
+                heart.style.animationDuration = (1.5 + Math.random()) + "s";
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+
+            // Criando os fogos de artifício
+            for (let i = 0; i < 15; i++) {
+                let firework = document.createElement("div");
+                firework.classList.add("firework");
+                firework.style.left = Math.random() * window.innerWidth + "px";
+                firework.style.top = Math.random() * window.innerHeight + "px";
+                firework.style.backgroundColor = ["gold", "red", "blue", "purple", "white"][Math.floor(Math.random() * 5)];
+                document.body.appendChild(firework);
+
+                setTimeout(() => {
+                    firework.remove();
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
